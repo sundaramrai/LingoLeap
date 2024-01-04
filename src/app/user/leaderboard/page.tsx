@@ -29,6 +29,8 @@ const Leaderboard = () => {
     fetchLeaderboardData();
   }, []);
 
+  const sortedUsers = [...users].sort((a, b) => b.experience - a.experience);
+
   const rank = (index) => {
     switch (index) {
       case 0:
@@ -61,7 +63,7 @@ const Leaderboard = () => {
           <div className="flex flex-col">
             {loading && <AiOutlineLoading className="animate-spin h-12 w-12 mx-auto" />}
 
-            {users.map((user, index) => (
+            {sortedUsers.map((user, index) => (
               <div
                 key={user._id}
                 className="w-auto flex items-center p-2 px-4 gap-4 rounded-xl odd:bg-slate-900/5 dark:odd:bg-slate-900/50"
