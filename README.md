@@ -1,10 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LingoLeap 
+
+## Ideation
+
+Develop therapy material in Hindi for misarticulation children.
+
+Our project helps children with misarticulation, a platform that integrates speech recognition for precise pronunciation, accessibility improvements, and the provision of therapy resources in Hindi via gamified language acquisition thereby encouraging participation and steady development throughout their speech therapy process.
+
+Presentation Link : - [Click here](https://www.canva.com/design/DAF46kiPCxw/AnhzPyR1pIgxE3TdFUDAeg/view?utm_content=DAF46kiPCxw&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+
+## Objective 
+
+Web App helping children in Hindi-speaking communities enhance their speech articulation skills while enjoying their learning journey.
 
 ## Getting Started
 
-First, run the development server:
+First, run the web application using nextjs and nodejs separately on different command prompts:
 
-```bash
+```
+nextjs ->
 npm run dev
 # or
 yarn dev
@@ -12,13 +25,14 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
+nodejs ->
+cd Backend
+# and
+npm start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
