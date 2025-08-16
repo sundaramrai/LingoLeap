@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const SentencesLesson = ({ data }) => {
   const [displayTable, setDisplayTable] = useState(false);
   const speechSynthesis = window.speechSynthesis;
-  let audio = (textToSpeak)=>{
+  let audio = (textToSpeak) => {
     if (textToSpeak) {
       const utterance = new SpeechSynthesisUtterance(textToSpeak);
       utterance.lang = "hi-IN";
       console.log(utterance);
       speechSynthesis.speak(utterance);
-  }
+    }
   }
 
   return (
@@ -47,10 +48,10 @@ const SentencesLesson = ({ data }) => {
               </tr>
             </thead>
             <tbody>
-              {data.sentences.map((char,index) => (
-                <tr key={`id-${index}`} onClick={() => audio(char.sentence)} className='cursor-pointer'>
+              {data.sentences.map((char) => (
+                <tr key={`id-${char.sentence}-${char.pronunciation}`} onClick={() => audio(char.sentence)} className='cursor-pointer'>
                   <td className="w-fit border-2 p-2 sm:p-4 text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center scale-150 md:scale-100">
-                    {index + 1}
+                    {/* Optionally, you can display the index by using data.sentences.indexOf(char) + 1 if needed */}
                   </td>
                   <td className="w-1/2 border-2 p-2 sm:p-4 text-xl sm:text-2xl md:text-3xl">
                     <div className="grid gap-2">
@@ -75,6 +76,20 @@ const SentencesLesson = ({ data }) => {
       <div className={`banner-bg-style ${data.backgroundImage}`} />
     </div>
   );
+};
+SentencesLesson.propTypes = {
+  data: PropTypes.shape({
+    backgroundColor: PropTypes.string,
+    backgroundImage: PropTypes.string,
+    lessonNumber: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    sentences: PropTypes.arrayOf(
+      PropTypes.shape({
+        sentence: PropTypes.string,
+        pronunciation: PropTypes.string,
+      })
+    ),
+  }).isRequired,
 };
 
 export default SentencesLesson;
