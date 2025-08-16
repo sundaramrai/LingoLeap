@@ -27,36 +27,39 @@ const register = async (req, res) => {
     password,
     verificationToken,
   });
-  const origin = `http://${process.env.DOMAIN}/api/v1`;
+  const origin =
+    process.env.NODE_ENV === 'production'
+      ? process.env.NEXT_PUBLIC_API_URL + '/api/v1'
+      : `http://${process.env.DOMAIN}/api/v1`;
   await sendVerificationEmail({
     name: user.name,
     email: user.email,
     verificationToken: user.verificationToken,
     origin,
   });
-  // send verification token back only while testing in postman!!!
   res.status(StatusCodes.CREATED).json({
     msg: 'Success! Please check your email to verify account',
   });
 };
 
 const verifyEmail = async (req, res) => {
-  const verificationToken = req.query.verificationToken;
-  const email = req.query.email;
-  const user = await User.findOne({ email });
-  // console.log(user, verificationToken, email);
+  const { token, id } = req.query;
+  if (!token || !id) {
+    throw new CustomError.BadRequestError('Invalid verification link');
+  }
+  const user = await User.findById(id);
   if (!user) {
     throw new CustomError.UnauthenticatedError('Verification Failed');
   }
-
-  if (user.verificationToken !== verificationToken) {
-    throw new CustomError.UnauthenticatedError('Verification Failed');
+  const isMatch = await require('bcryptjs').compare(token, user.verifyToken);
+  if (!isMatch || user.verifyTokenExpiry < Date.now()) {
+    throw new CustomError.UnauthenticatedError('Verification Failed or Token Expired');
   }
 
   user.isVerified = true;
   user.verified = Date.now();
-  user.verificationToken = '';
-
+  user.verifyToken = '';
+  user.verifyTokenExpiry = null;
   await user.save();
 
   res.status(StatusCodes.OK).json({ msg: 'Email Verified' });
@@ -132,19 +135,24 @@ const forgotPassword = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    const passwordToken = crypto.randomBytes(70).toString('hex');
-    const origin = `http://${process.env.DOMAIN}/api/v1`;
+    const passwordToken = crypto.randomBytes(32).toString('hex');
+    const hashedToken = require('bcryptjs').hashSync(passwordToken, 10);
+    const origin =
+      process.env.NODE_ENV === 'production'
+        ? process.env.NEXT_PUBLIC_API_URL + '/api/v1'
+        : `http://${process.env.DOMAIN}/api/v1`;
     await sendResetPasswordEmail({
       name: user.name,
       email: user.email,
       token: passwordToken,
+      userId: user._id,
       origin,
     });
 
     const tenMinutes = 1000 * 60 * 10;
     const passwordTokenExpirationDate = new Date(Date.now() + tenMinutes);
 
-    user.passwordToken = createHash(passwordToken);
+    user.passwordToken = hashedToken;
     user.passwordTokenExpirationDate = passwordTokenExpirationDate;
     await user.save();
   }
@@ -155,27 +163,29 @@ const forgotPassword = async (req, res) => {
 };
 
 const resetPassword = async (req, res) => {
-  const { token, email, password } = req.query;
-  if (!token || !email || !password) {
+  const { token, id, password } = req.query;
+  if (!token || !id || !password) {
     throw new CustomError.BadRequestError('Please provide all values');
   }
-  const user = await User.findOne({ email });
+  const user = await User.findById(id);
 
   if (user) {
+    const isMatch = await require('bcryptjs').compare(token, user.passwordToken);
     const currentDate = new Date();
 
     if (
-      user.passwordToken === createHash(token) &&
+      isMatch &&
       user.passwordTokenExpirationDate > currentDate
     ) {
       user.password = password;
       user.passwordToken = null;
       user.passwordTokenExpirationDate = null;
       await user.save();
+      return res.send('reset password');
     }
   }
 
-  res.send('reset password');
+  throw new CustomError.UnauthenticatedError('Invalid or expired reset token');
 };
 
 module.exports = {
