@@ -17,7 +17,7 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        const response = await axios.get<{ users: User[] }>('http://localhost:5000/api/v1/user/leaderboard');
+        const response = await axios.get<{ users: User[] }>(`${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/api/v1/user/leaderboard`);
         setUsers(response.data.users);  // Access the "users" array from the response
         setLoading(false);
       } catch (error) {
