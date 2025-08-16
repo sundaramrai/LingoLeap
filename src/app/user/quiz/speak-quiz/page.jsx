@@ -1,9 +1,8 @@
 "use client";
-// Import necessary libraries
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { quiz } from '../../../data/quiz/speakquizdata';
 import { MdMic } from 'react-icons/md';
-import styles from './styles.css';
+import './styles.css';
 
 let recognition;
 
@@ -21,16 +20,8 @@ const SpeakQuizPage = () => {
   const [listening, setListening] = useState(false);
 
   const { questions } = quiz;
-  
-  // Check if questions[activeQuestion] is defined
   const currentQuestion = questions[activeQuestion];
-  if (!currentQuestion) {
-    // Handle case where activeQuestion is out of bounds
-    // You might want to redirect or handle this scenario based on your application logic
-    return <p>Invalid question index</p>;
-  }
-
-  const { question, correctAnswer: correctAns } = currentQuestion;
+  const { question, correctAnswer: correctAns } = currentQuestion || {};
 
   const startRecording = () => {
     recognition.start();
@@ -40,15 +31,12 @@ const SpeakQuizPage = () => {
   const stopRecording = () => {
     recognition.stop();
     setListening(false);
-    // Check the user's answer when recording stops
     checkAnswer();
   };
 
   const checkAnswer = () => {
-    // Compare the user's answer with the correct answer
     const isCorrect = userAnswer.toLowerCase() === correctAns.toLowerCase();
 
-    // Update the result and move to the next question
     setResult((prev) => ({
       ...prev,
       score: isCorrect ? prev.score + 5 : prev.score,
@@ -56,12 +44,8 @@ const SpeakQuizPage = () => {
       wrongAnswers: isCorrect ? prev.wrongAnswers : prev.wrongAnswers + 1,
     }));
 
-    // Set the correct answer for displaying feedback
     setCorrectAnswer(correctAns);
-
-    // Mark the question as completed
     setQuestionCompleted(true);
-
     if (activeQuestion === questions.length - 1) {
       setShowResult(true);
     }
@@ -69,26 +53,24 @@ const SpeakQuizPage = () => {
   };
 
   const nextQuestion = () => {
-    // Move to the next question
     setActiveQuestion((prev) => prev + 1);
-    // Reset state for the new question
     setCorrectAnswer('');
     setUserAnswer('');
     setQuestionCompleted(false);
   };
 
   useEffect(() => {
-    // Initialize speech recognition when the component mounts
-    recognition = new webkitSpeechRecognition();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SpeechRecognition();
     recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = 'hi-IN';
 
     recognition.onresult = function (event) {
-      var interim_transcript = '';
-      var final_transcript = '';
+      let interim_transcript = '';
+      let final_transcript = '';
 
-      for (var i = event.resultIndex; i < event.results.length; ++i) {
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           final_transcript += event.results[i][0].transcript;
           setUserAnswer(final_transcript);
@@ -100,7 +82,6 @@ const SpeakQuizPage = () => {
     };
 
     return () => {
-      // Cleanup speech recognition when the component unmounts
       if (recognition) {
         recognition.stop();
       }

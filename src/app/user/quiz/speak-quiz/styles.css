@@ -18,9 +18,10 @@ main {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: #333;
-  /* font-weight: bold; */
 }
 
 h3 {
@@ -70,15 +71,11 @@ li {
 }
 
 li:hover {
-  /* transform: scale3d(1.04, 1.04, 1.04); */
   border: 1px solid darkgreen;
 }
 
 .li-selected {
-  /* color: #fff; */
   background-color: rgb(148, 219, 148);
-  /* border: 1px solid darkgreen; */
-  /* opacity: 0.2; */
 }
 
 .container {
@@ -117,7 +114,7 @@ li:hover {
   color: red;
 }
 
-textarea{
+textarea {
   height: 100px;
   width: 820px;
 }
