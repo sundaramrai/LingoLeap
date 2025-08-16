@@ -6,7 +6,7 @@ const sentencesData = [
         title: 'Ordering in a Cafe',
         backgroundColor: 'bg-gradient-to-r from-blue-600 to-blue-500',
         backgroundImage: 'bg-curtain',
-        sentences:[
+        sentences: [
             { sentence: 'कृपया मुझे एक कॉफ़ी दीजिए।', pronunciation: 'Krupaya mujhe ek coffee dijiye.' }, // Please give me a coffee.
             { sentence: 'आपका आर्डर क्या है?', pronunciation: 'Aapka order kya hai?' }, // What is your order?
             { sentence: 'मुझे एक चाय मिल सकती है?', pronunciation: 'Mujhe ek chai mil sakti hai?' }, // Can I get a tea?
@@ -47,7 +47,7 @@ const sentencesData = [
         title: "Greeting People",
         backgroundColor: 'bg-gradient-to-r from-orange-600 to-orange-500',
         backgroundImage: 'bg-circles',
-        sentences:[
+        sentences: [
             { sentence: 'नमस्कार।', pronunciation: 'Namaskar.' }, // Greetings.
             { sentence: 'प्रणाम।', pronunciation: 'Pranam.' }, // Salutations.
             { sentence: 'आप कैसे हैं?', pronunciation: 'Aap kaise hain?' }, // How are you?
@@ -83,7 +83,7 @@ const sentencesData = [
         title: 'Describe Yourself',
         backgroundColor: 'bg-gradient-to-r from-lime-600 to-lime-400',
         backgroundImage: 'bg-autumn',
-        sentences:[
+        sentences: [
             { sentence: 'मैं दिल्ली से हूँ।', pronunciation: 'Main Delhi se hoon.' }, // I am from Delhi.
             { sentence: 'मेरा जन्म पहले जनवरी को हुआ था।', pronunciation: 'Mera janm pehle Janvari ko hua tha.' }, // I was born on the first of January.
             { sentence: 'मेरी उम्र पच्चीस साल है।', pronunciation: 'Meri umr pachchis saal hai.' }, // I am twenty-five years old.
@@ -134,7 +134,7 @@ const sentencesData = [
         title: 'Asking for Directions',
         backgroundColor: 'bg-gradient-to-r from-[#c20323] to-[#ef233c]',
         backgroundImage: 'bg-i-like-food',
-        sentences:[
+        sentences: [
             { sentence: 'मुझे यहाँ कैसे पहुँचा जा सकता है?', pronunciation: 'Mujhe yahan kaise pahuncha ja sakta hai?' }, // How can I reach here?
             { sentence: 'यहाँ सबसे नजदीक का बस स्टैंड कहाँ है?', pronunciation: 'Yahan sabse najdeek ka bus stand kahan hai?' }, // Where is the nearest bus stand?
             { sentence: 'सड़क का विवरण दीजिए।', pronunciation: 'Sarak ka vivaran dijiye' }, // Please give me directions to the street.
