@@ -27,7 +27,7 @@ const register = async (req, res) => {
     password,
     verificationToken,
   });
-  const origin = 'http://localhost:5000/api/v1';
+  const origin = `http://${process.env.DOMAIN}/api/v1`;
   await sendVerificationEmail({
     name: user.name,
     email: user.email,
@@ -41,12 +41,10 @@ const register = async (req, res) => {
 };
 
 const verifyEmail = async (req, res) => {
-  // const { verificationToken, email } = req.query;
   const verificationToken = req.query.verificationToken;
   const email = req.query.email;
   const user = await User.findOne({ email });
-  console.log(user);
-  // console.log(verificationToken, email);
+  // console.log(user, verificationToken, email);
   if (!user) {
     throw new CustomError.UnauthenticatedError('Verification Failed');
   }
@@ -135,7 +133,7 @@ const forgotPassword = async (req, res) => {
 
   if (user) {
     const passwordToken = crypto.randomBytes(70).toString('hex');
-    const origin = 'http://localhost:5000/api/v1';
+    const origin = `http://${process.env.DOMAIN}/api/v1`;
     await sendResetPasswordEmail({
       name: user.name,
       email: user.email,
