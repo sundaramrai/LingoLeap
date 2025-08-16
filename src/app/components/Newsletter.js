@@ -16,8 +16,6 @@ const Newsletter = () => {
 
                             <button className="inline-block rounded bg-red-500 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-600 focus-visible:ring active:bg-red-700 md:text-base">Send</button>
                         </form>
-
-                        <p className="text-center text-xs text-gray-400 lg:text-right">By signing up to our messages you agree to our <a href="#" className="underline transition duration-100 hover:text-red-500 active:text-red-600">Term of Service</a> and <a href="#" className="underline transition duration-100 hover:text-red-500 active:text-red-600">Privacy Policy</a>.</p>
                     </div>
                 </div>
             </div>
