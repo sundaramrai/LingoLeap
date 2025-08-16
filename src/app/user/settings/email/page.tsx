@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '@/app/components/Navbar'
 import Footer from '@/app/components/Footer'
-import Link from 'next/link'
 
 const settings_email = () => {
   return (
@@ -23,7 +22,7 @@ const settings_email = () => {
                 <input name="email" required={true} className="w-full rounded border bg-red-50 px-3 py-2 text-red-500 outline-none ring-indigo-300 transition duration-100 focus:ring" />
               </div>
               {/* <Link href={"/settings"}> */}
-                <button className="block rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-bold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-700 focus-visible:ring active:bg-red-600 md:text-base">Update</button>
+              <button className="block rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-bold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-700 focus-visible:ring active:bg-red-600 md:text-base">Update</button>
               {/* </Link> */}
             </div>
           </form>
