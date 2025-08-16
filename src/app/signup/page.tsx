@@ -1,6 +1,5 @@
 "use client"
-import Link from "next/link"
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 export default function SignupPage() {
@@ -37,48 +36,8 @@ export default function SignupPage() {
     }, [user]);
 
     return (
-        // <div className="flex flex-col items-center
-        // justify-center min-h-screen py-2">
-        //     <h1>{loading ? "Processing" : "SignUp"}</h1>
-        //     <hr />
-        //     <label htmlFor="username" >username</label>
-        //     <input className="p-2 m-1 rounded text-black"
-        //         id="username"
-        //         type="text" 
-        //         value={user.username}
-        //         onChange={(e)=> setUser({...user, username: e.target.value })}
-        //         placeholder="username"
-        //         />
-
-        //         <label htmlFor="email">email</label>
-        //         <input className="p-2 m-1 rounded text-black"
-        //         id="email"
-        //         type="text" 
-        //         value={user.email}
-        //         onChange={(e)=> setUser({...user, email: e.target.value })}
-        //         placeholder="email"
-        //         />
-
-        //         <label htmlFor="password">password</label>
-        //         <input className="p-2 m-1 rounded text-black"
-        //         id="password"
-        //         type="password" 
-        //         value={user.password}
-        //         onChange={(e)=> setUser({...user, password: e.target.value })}
-        //         placeholder="password"
-        //         />
-
-        //         <button
-        //         className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
-        //         onClick={onSignup}
-        //         >{buttonDisabled ? "No SignUp" : "SignUp"}</button>
-        //         <Link href="/login">Visit Login Page</Link>  
-
-        // </div>
         <div className="bg-white py-6 sm:py-8 lg:py-12">
             <div className="mx-auto max-w-screen-2xl mt-36 px-4 md:px-96">
-                {/* <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Login</h2> */}
-
                 {/* <form className="mx-auto max-w-lg rounded-lg border"> */}
                 <div className="flex flex-col gap-4 p-4 md:p-8 border border-red-400">
                     <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">{loading ? "Processing" : "SignUp"}</h2>

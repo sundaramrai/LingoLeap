@@ -11,14 +11,11 @@ const message = () => {
                     <div className="flex flex-col items-center">
                         {/* <!-- logo - start --> */}
                         <a href="/" className="mb-8 inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl pt-16" aria-label="logo">
-                            <svg width="95" height="94" viewBox="0 0 95 94" className="h-auto w-6 text-red-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M96 0V47L48 94H0V47L48 0H96Z" />
-                            </svg>
-
+                            <img src='/lingoleap.png' style={{ width: '30px', height: '30px' }} alt="LingoLeap Logo" />
                             LingoLeap
                         </a>
                         {/* <!-- logo - end --> */}
-                        <h1 className="mb-2 text-center text-2xl font-medium text-gray-800 md:text-3xl">Seems you haven't Signed Up or Logged in</h1>
+                        <h1 className="mb-2 text-center text-2xl font-medium text-gray-800 md:text-3xl">Seems you haven&#39;t Signed Up or Logged in</h1>
 
                         <p className="mb-4 text-sm font-semibold uppercase text-red-500 md:text-base pt-6">Click below to Signup/Login</p>
 
