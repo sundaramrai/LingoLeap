@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import Link from "next/link";
+import PropTypes from "prop-types";
 
 const CustomLink = ({ title, path, icon }) => {
   return (
@@ -11,6 +11,12 @@ const CustomLink = ({ title, path, icon }) => {
       </div>
     </Link>
   );
+};
+
+CustomLink.propTypes = {
+  title: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+  icon: PropTypes.node
 };
 
 export default CustomLink;
