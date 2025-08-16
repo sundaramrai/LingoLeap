@@ -7,12 +7,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "LingoLeap",
   description: "LingoLeap",
+  icons: {
+    icon: "/lingoleap.png",
+  },
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  readonly children: React.ReactNode;
 }) {
   return (
     <html lang="en">
