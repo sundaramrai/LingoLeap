@@ -1,15 +1,13 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react'
 import Navbar from '@/app/components/Navbar'
 import Footer from '@/app/components/Footer'
 import { useRouter } from "next/navigation"
-import Link from 'next/link'
 import axios from 'axios'
 
 
 export default function ProfilePage() {
     const router = useRouter();
-    const [data, setData] = useState("nothing")
     const logout = async () => {
         try {
             await axios.get('/api/users/logout')
@@ -26,11 +24,11 @@ export default function ProfilePage() {
             <Navbar />
             <section className="text-gray-600 ml-64 my-10 body-font">
                 <div className="container px-5 mx-auto">
-                    
-                <div className="flex flex-col items-end">
-                    <button className="bg-red-500 mt-4 hover:bg-red-600 text-white font-bold py-3 px-7 rounded"
-                    onClick={logout}>Logout</button>
-                </div>
+
+                    <div className="flex flex-col items-end">
+                        <button className="bg-red-500 mt-4 hover:bg-red-600 text-white font-bold py-3 px-7 rounded"
+                            onClick={logout}>Logout</button>
+                    </div>
                     <img className="w-36 h-36 mx-auto mb-5 object-cover object-center rounded-full" alt="profile" src="/download.png" />
                     <div className="mx-auto max-w-screen-xl px-4 md:px-8">
                         {/* text - start */}
@@ -59,21 +57,6 @@ export default function ProfilePage() {
             onClick={logout}
             >Logout</button> */}
                             </div>
-
-
-                            {/* stat - start */}
-                            {/* <div className="flex flex-col items-center justify-center rounded-lg bg-gray-100 p-4 md:p-8">
-                                <div className="text-xl font-bold text-red-500 sm:text-2xl md:text-2xl">1000 <img className='inline-flex h-8 w-8 pb-1' src="https://cdn-icons-png.flaticon.com/128/765/765093.png" alt="Diamond" /></div>
-                                <div className="text-sm font-semibold sm:text-base">Diamonds</div>
-                            </div> */}
-                            {/* stat - end */}
-
-                            {/* stat - start */}
-                            {/* <div className="flex flex-col items-center justify-center rounded-lg bg-gray-100 p-4 md:p-8">
-                                <div className="text-xl font-bold text-red-500 sm:text-2xl md:text-2xl">Emerald<img className='inline-flex h-8 w-8 pb-1' src="https://cdn-icons-png.flaticon.com/128/4932/4932396.png" alt="League" /></div>
-                                <div className="text-sm font-semibold sm:text-base">League</div>
-                            </div> */}
-                            {/* stat - end */}
                         </div>
                     </div>
                 </div>
@@ -82,5 +65,3 @@ export default function ProfilePage() {
         </div>
     )
 }
-
-
