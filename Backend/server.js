@@ -13,7 +13,22 @@ const userRouter = require('./routes/userRoutes');
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
-app.use(cors());
+const allowedOrigins = [
+  process.env.FRONTEND_DOMAIN || 'http://localhost:3000',
+  process.env.NEXT_PUBLIC_API_URL || 'https://lingoleap.onrender.com',
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 
