@@ -17,7 +17,13 @@ const Leaderboard = () => {
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        const response = await axios.get<{ users: User[] }>(`${process.env.NEXT_PUBLIC_BACKEND_DOMAIN}/api/v1/user/leaderboard`);
+        const backendDomain =
+          process.env.NODE_ENV === "production"
+            ? process.env.NEXT_PUBLIC_API_URL
+            : process.env.NEXT_PUBLIC_BACKEND_DOMAIN;
+        const response = await axios.get<{ users: User[] }>(
+          `${backendDomain}/api/v1/user/leaderboard`
+        );
         setUsers(response.data.users);  // Access the "users" array from the response
         setLoading(false);
       } catch (error) {
