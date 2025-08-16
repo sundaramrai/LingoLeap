@@ -1,22 +1,22 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '@/app/components/Navbar'
 import Footer from '@/app/components/Footer'
 // import Link from 'next/link'
-import { useState } from 'react'
 // import { useRouter } from 'next/router'
 
-const settings_profile_picture = () => {
-    // const [image, setImage] = useState(null)
+const SettingsProfilePicture = () => {
+    // const [image, setImage] = useState<File | null>(null);
     // const [loading, setLoading] = useState(false)
     // const router = useRouter()
     // const [profilePicture, setProfilePicture] = useState('')
     // const [profilePictureUrl, setProfilePictureUrl] = useState('')
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const [image, setImage] = useState<File | null>(null);
-        }
+        // const file = e.target.files?.[0];
+        // if (file) {
+        //     setImage(file);
+        // }
     }
 
     // const handleUpload = (e) => {
@@ -92,4 +92,4 @@ const settings_profile_picture = () => {
     )
 }
 
-export default settings_profile_picture
+export default SettingsProfilePicture
