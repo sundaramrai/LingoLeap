@@ -14,9 +14,12 @@ const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const allowedOrigins = [
-  process.env.FRONTEND_DOMAIN || 'http://localhost:3000',
-  process.env.NEXT_PUBLIC_API_URL || 'https://lingoleap.onrender.com',
-];
+  ...(process.env.FRONTEND_DOMAIN
+    ? process.env.FRONTEND_DOMAIN.split(',').map(origin => origin.trim())
+    : []),
+  'http://localhost:3000',
+  process.env.NEXT_PUBLIC_API_URL
+].filter(Boolean);
 
 app.use(cors({
   origin: function (origin, callback) {
@@ -49,7 +52,10 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
+      console.log(`Server is listening on port ${port}...`),
+      console.log(process.env.MONGO_URI),
+      console.log(process.env.FRONTEND_DOMAIN),
+      console.log(process.env.NEXT_PUBLIC_API_URL)
     );
   } catch (error) {
     console.log(error);
